@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products | GSD Suppliers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #0b0c10;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #a855f7, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Navbar Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: rgba(11, 12, 16, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #3b82f6;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            font-size: 14px;
+            font-weight: 600;
+            color: #9ca3af;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: #ffffff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .login-btn {
+            background-color: #a855f7;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Content Container Layout */
+        .main-container {
+            padding: 40px 8%;
+        }
+
+        .page-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .search-bar-container {
+            margin-bottom: 40px;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-bar-container i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 12px 12px 45px;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: #a855f7;
+        }
+
+        /* Section Breakdown Styling */
+        .product-section {
+            margin-bottom: 60px;
+        }
+
+        .section-heading {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            border-left: 4px solid #a855f7;
+            padding-left: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Grid Display Structure */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 16px;
+            position: relative;
+            transition: border-color 0.3s, transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card:hover {
+            border-color: rgba(168, 85, 247, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .badge-container {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            display: flex;
+            gap: 6px;
+            z-index: 2;
+        }
+
+        .badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+        }
+
+        .badge-best { background-color: #22c55e; color: white; }
+        .badge-feat { background-color: #a855f7; color: white; }
+
+        .image-wrapper {
+            width: 100%;
+            height: 160px;
+            border-radius: 10px;
+            background-color: #16181f;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        /* Glowing graphic fallbacks imitating posters */
+        .graphic-icon {
+            font-size: 48px;
+            background: linear-gradient(135deg, #a855f7, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 0px 8px rgba(168, 85, 247, 0.5));
+        }
+
+        .info-row h4 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #f3f4f6;
+        }
+
+        .rating-box {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: #fab005;
+            margin-bottom: 15px;
+        }
+
+        .rating-box span {
+            color: #9ca3af;
+        }
+
+        .action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .price-label {
+            font-size: 18px;
+            font-weight: 800;
+            color: #a855f7;
+        }
+
+        .buy-now-btn {
+            background-color: rgba(168, 85, 247, 0.1);
+            border: 1px solid #a855f7;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .buy-now-btn:hover {
+            background-color: #a855f7;
+        }
+
+        /* Footer Custom View */
+        footer {
+            background-color: #07080c;
+            padding: 60px 8% 40px 8%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-about p {
+            font-size: 14px;
+            color: #9ca3af;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: #9ca3af;
+            font-size: 18px;
+        }
+
+        .footer-column h5 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 14px;
+            color: #9ca3af;
+        }
+
+        .payment-list {
+            font-size: 14px;
+            color: #9ca3af;
+            margin-top: 10px;
+            font-weight: 600;
+            word-spacing: 6px;
+        }
+
+        @media(max-width: 1024px) {
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+        @media(max-width: 600px) {
+            .products-grid { grid-template-columns: 1fr; }
+            header { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar Setup -->
+    <header>
+        <div class="logo">GSD <span>Suppliers</span></div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Products</a></li>
+                <li><a href="#">Gaming Top-ups</a></li>
+                <li><a href="#">Gift Cards</a></li>
+                <li><a href="#">Subscriptions</a></li>
+            </ul>
+        </nav>
+        <div class="nav-right">
+            <a href="#" class="login-btn">Login</a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <h1 class="page-title">All Products</h1>
+        <div class="search-bar-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" class="search-input" placeholder="Search products...">
+        </div>
+
+        <!-- ================= SECTION 1: PUBG MOBILE UC ================= -->
+        <div class="product-section">
+            <h3 class="section-heading"><i class="fa-solid fa-crosshairs"></i> PUBG Mobile UC Rates</h3>
+            <div class="products-grid">
+                
+                <!-- 60 UC -->
+                <div class="product-card">
+                    <div class="badge-container">
+                        <span class="badge badge-best">Best Seller</span>
+                        <span class="badge badge-feat">Featured</span>
+                    </div>
+                    <div class="image-wrapper">
+                        <div class="graphic-icon"><i class="fa-solid fa-coins"></i></div>
+                    </div>
+                    <div class="info-row">
+                        <h4>PUBG Mobile 60 UC</h4>
+                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.7 <span>(180)</span></div>
+                    </div>
+                    <div class="action-row">
+                        <div class="price-label">Rs. 150</div>
+                        <button class="buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+
+                <!-- 120 UC -->
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <div class="graphic-icon"><i class="fa-solid fa-coins"></i></div>
+                    </div>
+                    <div class="info-row">
+                        <h4>PUBG Mobile 120 UC</h4>
+                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.8 <span>(110)</span></div>
+                    </div>
+                    <div class="action-row">
+                        <div class="price-label">Rs. 300</div>
+                        <button class="buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+
+                <!-- 325 UC -->
+                <div class="product-card">
+                    <div class="badge-container">
+                        <span class="badge badge-best">Best Seller</span>
+                    </div>
+                    <div class="image-wrapper">
+                        <div class="graphic-icon"><i class="fa-solid fa-coins"></i></div>
+                    </div>
+                    <div class="info-row">
+                        <h4>PUBG Mobile 325 UC</h4>
+                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.8 <span>(190)</span></div>
+                    </div>
+                    <div class="action-row">
+                        <div class="price-label">Rs. 750</div>
+                        <button class="buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+
+                <!-- 660 UC -->
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <div class="graphic-icon"><i class="fa-solid fa-coins"></i></div>
+                    </div>
+                    <div class="info-row">
+                        <h4>PUBG Mobile 660 UC</h4>
+                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.9 <span>(230)</span></div>
+                    </div>
+                    <div class="action-row">
+                        <div class="price-label">Rs. 1500</div>
+                        <button class="buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ================= SECTION 2: MOBILE LEGENDS ================= -->
+        <div class="product-section">
+            <h3 class="section-heading"><i class="fa-solid fa-gem"></i> Mobile Legends Rates</h3>
+            <div class="products-grid">
+                
+                <!-- 50 + 5 Diamonds -->
+                <div class="product-card">
+                    <div class="badge-container">
+                        <span class="badge badge-feat">2X Bonus</span>
+                    </div>
+                    <div class="image-wrapper">
+                        <div class="graphic-icon" style="background: linear-gradient(135deg, #00d2ff, #0066ff); -webkit-background-clip: text;"><i class="fa-solid fa-diamond"></i></div>
+                    </div>
+                    <div class="info-row">
+                        <h4>MLBB 50 + 5 Diamonds</h4>
+                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.6 <span>(95)</span></div>
+                    </div>
+                    <div class="action-row">
+                        <div class="price-label">Rs. 135</div>
+                        <button class="buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+
+                <!-- 172 Diamonds -->
+                <div class="product-card">
+                    <div class="badge-container">
+                        <span class="badge badge-best">Normal</span>
+                    </div>
+                    <div class="image-wrapper">
+                        <div class="graphic-icon" style="background: linear-gradient(135deg, #00d2ff, #0066ff); -webkit-background-clip: text;"><i class="fa-solid fa-diamond"></i></div>
+                    </div>
+                    <div class="info-row">
+                        <h4>MLBB 172 Diamonds</h4>
+                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.7 <span>(140)</span></div>
+                    </div>
+                    <div class="action-row">
+                        <div class="price-label">Rs. 440</div>
+                        <button class="buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+
+                <!-- Weekly Pass -->
+                <div class="product-card">
+                    <div class="badge-container">
+                        <span class="badge badge-best">Best Value</span>
+                    </div>
+                    <div class="image-wrapper">
+                        <div class="graphic-icon" style="background: linear-gradient(135deg, #11998e, #38ef7d); -webkit-background-clip: text;"><i class="fa-solid fa-id-card"></i></div>
+                    </div>
+                    <div class="info-row">
+                        <h4>MLBB Weekly Ticket Pass</h4>
+                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.9 <span>(410)</span></div>
+                    </div>
+                    <div class="action-row">
+                        <div class="price-label">Rs. 260</div>
+                        <button class="buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+
+                <!-- Twilight Pass -->
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <div class="graphic-icon" style="background: linear-gradient(135deg, #8e2de2, #4a00e0); -webkit-background-clip: text;"><i class="fa-solid fa-moon"></i></div>
+                    </div>
+                    <div class="info-row">
+                        <h4>MLBB Twilight Premium Pass</h4>
+                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.8 <span>(185)</span></div>
+                    </div>
+                    <div class="action-row">
+                        <div class="price-label">Rs. 1400</div>
+                        <button class="buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ================= SECTION 3: NETFLIX SUBSCRIPTIONS ================= -->
+        <div class="product-section">
+            <h3 class="section-heading"><i class="fa-solid fa-film"></i> Netflix Premium (4K Ultra HD)</h3>
+            <div class="products-grid">
+                
+                <!-- 1 Month Screen -->
+                <div class="product-card">
+                    <div class="badge-container">
+                        <span class="badge badge-feat">Single Screen</span>
+                    </div>
+                    <div class="image-wrapper">
+                        <div class="graphic-icon" style="color: #e50914; -webkit-text-fill-color: #e50914; filter: drop-shadow(0px 0px 8px rgba(229, 9, 20, 0.4));"><i class="fa-solid fa-tv"></i></div>
+                    </div>
+                    <div class="info-row">
+                        <h4>Netflix Premium - 1 Month</h4>
+                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.9 <span>(510)</span></div>
+                    </div>
+                    <div class="action-row">
+                        <div class="price-label">Rs. 350</div>
+                        <button class="buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+
+                <!-- 3 Month Screen -->
+                <div class="product-card">
+                    <div class="badge-container">
+                        <span class="badge badge-best">Best Seller</span>
+                    </div>
+                    <div class="image-wrapper">
+                        <div class="graphic-icon" style="color: #e50914; -webkit-text-fill-color: #e50914; filter: drop-shadow(0px 0px 8px rgba(229, 9, 20, 0.4));"><i class="fa-solid fa-tv"></i></div>
+                    </div>
+                    <div class="info-row">
+                        <h4>Netflix Premium - 3 Months</h4>
+                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.9 <span>(680)</span></div>
+                    </div>
+                    <div class="action-row">
+                        <div class="price-label">Rs. 950</div>
+                        <button class="buy-now-btn">Buy Now</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer Component Layout -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="logo">GSD <span>Suppliers</span></div>
+                <p>Your premium dashboard portal for safe, trusted, and swift gaming currency top-ups and subscriptions.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li>All Products</li>
+                    <li>Gaming Top-ups</li>
+                    <li>Gift Cards</li>
+                    <li>Subscriptions</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h5>Support</h5>
+                <ul>
+                    <li>Contact Us</li>
+                    <li>FAQ Helpdesk</li>
+                    <li>Terms of Service</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h5>Payment Methods</h5>
+                <p style="font-size: 14px; color: #9ca3af;">We accept:</p>
+                <div class="payment-list">eSewa Khalti Visa Mastercard</div>
+            </div>
+        </div>
+        <p style="text-align: center; color: #4b5563; font-size: 13px; margin-top: 20px;">&copy; 2026 GSD Suppliers. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
