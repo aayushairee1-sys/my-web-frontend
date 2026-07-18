@@ -1,120 +1,504 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="description" content="A product of emergent.sh" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet" />
-        <!--
-        manifest.json provides metadata used when your web app is installed on a
-        user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-        -->
-        <!--
-        Notice the use of  in the tags above.
-        It will be replaced with the URL of the `public` folder during the build.
-        Only files inside the `public` folder can be referenced from the HTML.
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSD Suppliers | Fullstack App</title>
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Base Reset & Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-        Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
-        work correctly both with client-side routing and a non-root public URL.
-        Learn how to configure a non-root public URL by running `npm run build`.
-        -->
-        <title>Emergent | Fullstack App</title>
-        <script>window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);</script>
-        <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
-    <script defer src="/static/js/bundle.js"></script><script>
-if(window.self!==window.top){
-  var s=document.createElement("script");s.src="/visual-edit-overlay.js";document.head.appendChild(s);
-  window.tailwind=window.tailwind||{};tailwind.config={corePlugins:{preflight:false}};var t=document.createElement("script");t.src="https://cdn.tailwindcss.com";document.head.appendChild(t);
-}
-</script>
+        body {
+            background-color: #0b0c10;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Gradient Text Helper */
+        .gradient-text {
+            background: linear-gradient(90deg, #a855f7, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Header Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: rgba(11, 12, 16, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #3b82f6;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            font-size: 14px;
+            font-weight: 600;
+            color: #9ca3af;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffffff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cart-icon {
+            font-size: 18px;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .cart-icon:hover {
+            color: #ffffff;
+        }
+
+        .login-btn {
+            background-color: #a855f7;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #9333ea;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px 80px 20px;
+            background: radial-gradient(circle at top, rgba(168, 85, 247, 0.15), transparent 60%);
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: #9ca3af;
+            max-width: 600px;
+            margin: 0 auto 35px auto;
+            line-height: 1.6;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn-primary {
+            background-color: #a855f7;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #9333ea;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 1px solid #a855f7;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(168, 85, 247, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Section Global Layout */
+        .section-container {
+            padding: 60px 8%;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        /* Category Grid */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .category-card:hover {
+            border-color: rgba(168, 85, 247, 0.4);
+            transform: translateY(-5px);
+        }
+
+        .category-icon {
+            font-size: 28px;
+            color: #a855f7;
+            margin-bottom: 20px;
+        }
+
+        .category-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* Visual Accent Highlights inside Category Cards */
+        .category-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent 70%);
+            z-index: 0;
+        }
+
+        /* Section Header Row (For Best Sellers View All link) */
+        .section-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-header-row .section-title {
+            margin-bottom: 0;
+        }
+
+        .view-all {
+            color: #a855f7;
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .view-all:hover {
+            color: #9333ea;
+        }
+
+        /* Why Choose Us Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .feature-circle-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            font-size: 20px;
+        }
+
+        .feat-purple { background-color: rgba(168, 85, 247, 0.15); color: #a855f7; }
+        .feat-blue { background-color: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+        .feat-green { background-color: rgba(34, 197, 94, 0.15); color: #22c55e; }
+
+        .feature-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #9ca3af;
+            line-height: 1.6;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: #07080c;
+            padding: 70px 8% 40px 8%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-about p {
+            font-size: 14px;
+            color: #9ca3af;
+            margin: 15px 0 25px 0;
+            max-width: 300px;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            font-size: 18px;
+            color: #9ca3af;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ffffff;
+        }
+
+        .footer-column h5 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-column ul li a {
+            font-size: 14px;
+            color: #9ca3af;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #ffffff;
+        }
+
+        .payment-methods-text {
+            font-size: 14px;
+            color: #9ca3af;
+            margin-top: 10px;
+            font-weight: 600;
+            word-spacing: 8px;
+        }
+
+        /* Responsive Breakpoints */
+        @media(max-width: 968px) {
+            .category-grid, .features-grid, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 { font-size: 38px; }
+            header { padding: 20px 4%; }
+            .section-container { padding: 40px 4%; }
+            footer { padding: 50px 4% 30px 4%; }
+        }
+    </style>
 </head>
-    <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="root"></div>
-        <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+<body>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo">GSD <span>Suppliers</span></div>
+        <nav>
+            <ul>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Gaming Top-ups</a></li>
+                <li><a href="#">Gift Cards</a></li>
+                <li><a href="#">Subscriptions</a></li>
+            </ul>
+        </nav>
+        <div class="nav-right">
+            <i class="fa-solid fa-cart-shopping cart-icon"></i>
+            <a href="#" class="login-btn">Login</a>
+        </div>
+    </header>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-        <script>
-            !(function (t, e) {
-                var o, n, p, r;
-                e.__SV ||
-                    ((window.posthog = e),
-                    (e._i = []),
-                    (e.init = function (i, s, a) {
-                        function g(t, e) {
-                            var o = e.split(".");
-                            2 == o.length && ((t = t[o[0]]), (e = o[1])),
-                                (t[e] = function () {
-                                    t.push(
-                                        [e].concat(
-                                            Array.prototype.slice.call(
-                                                arguments,
-                                                0,
-                                            ),
-                                        ),
-                                    );
-                                });
-                        }
-                        ((p = t.createElement("script")).type =
-                            "text/javascript"),
-                            (p.crossOrigin = "anonymous"),
-                            (p.async = !0),
-                            (p.src =
-                                s.api_host.replace(
-                                    ".i.posthog.com",
-                                    "-assets.i.posthog.com",
-                                ) + "/static/array.js"),
-                            (r =
-                                t.getElementsByTagName(
-                                    "script",
-                                )[0]).parentNode.insertBefore(p, r);
-                        var u = e;
-                        for (
-                            void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
-                                u.people = u.people || [],
-                                u.toString = function (t) {
-                                    var e = "posthog";
-                                    return (
-                                        "posthog" !== a && (e += "." + a),
-                                        t || (e += " (stub)"),
-                                        e
-                                    );
-                                },
-                                u.people.toString = function () {
-                                    return u.toString(1) + ".people (stub)";
-                                },
-                                o =
-                                    "init me ws ys ps bs capture je Di ks register register_once register_for_session unregister unregister_for_session Ps getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Es $s createPersonProfile Is opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Ss debug xs getPageViewId captureTraceFeedback captureTraceMetric".split(
-                                        " ",
-                                    ),
-                                n = 0;
-                            n < o.length;
-                            n++
-                        )
-                            g(u, o[n]);
-                        e._i.push([i, s, a]);
-                    }),
-                    (e.__SV = 1));
-            })(document, window.posthog || []);
-            posthog.init("phc_xAvL2Iq4tFmANRE7kzbKwaSqp1HJjN7x48s3vr0CMjs", {
-                api_host: "https://us.i.posthog.com",
-                person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well,
-                session_recording: {
-                    recordCrossOriginIframes: true,
-                    capturePerformance: false,
-                },
-            });
-        </script>
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"7f7b0fd8732c4326aae4b9d58d5c514a","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+    <!-- Hero Showcase Section -->
+    <section class="hero">
+        <h1>Level Up Your <span class="gradient-text">Gaming<br>Experience</span></h1>
+        <p>Instant delivery of gaming top-ups, gift cards, and subscriptions. Secure, fast, and reliable.</p>
+        <div class="hero-btns">
+            <a href="#" class="btn-primary">Browse Products</a>
+            <a href="#" class="btn-secondary">Learn More</a>
+        </div>
+    </section>
+
+    <!-- Browse By Category Section -->
+    <section class="section-container">
+        <h2 class="section-title">Browse by <span class="gradient-text">Category</span></h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <div class="category-icon"><i class="fa-solid fa-gamepad"></i></div>
+                <h3>Gaming Top-ups</h3>
+            </div>
+            <div class="category-card">
+                <div class="category-icon"><i class="fa-solid fa-gift"></i></div>
+                <h3>Gift Cards</h3>
+            </div>
+            <div class="category-card">
+                <div class="category-icon"><i class="fa-solid fa-tv"></i></div>
+                <h3>Subscriptions</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Placeholders for Featured Products / Best Sellers -->
+    <section class="section-container">
+        <h2 class="section-title">Featured <span class="gradient-text">Products</span></h2>
+        <!-- Products cards can go here dynamically -->
+    </section>
+
+    <section class="section-container">
+        <div class="section-header-row">
+            <h2 class="section-title">Best <span class="gradient-text">Sellers</span></h2>
+            <a href="#" class="view-all">View All →</a>
+        </div>
+        <!-- Best selling item grids can go here -->
+    </section>
+
+    <!-- Why Choose Us Value Section -->
+    <section class="section-container">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">Why Choose <span class="gradient-text">GSD Suppliers</span></h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-circle-icon feat-purple"><i class="fa-solid fa-bolt"></i></div>
+                <h4>Instant Delivery</h4>
+                <p>Get your digital products delivered instantly to your account.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-circle-icon feat-blue"><i class="fa-solid fa-shield-halved"></i></div>
+                <h4>Secure Payments</h4>
+                <p>Multiple payment options with bank-level security.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-circle-icon feat-green"><i class="fa-solid fa-clock"></i></div>
+                <h4>24/7 Support</h4>
+                <p>Our team is always here to help you with any questions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Content -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="logo">GSD <span>Suppliers</span></div>
+                <p>Your trusted marketplace for gaming top-ups, gift cards, and digital subscriptions.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="#">All Products</a></li>
+                    <li><a href="#">Gaming Top-ups</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                    <li><a href="#">Subscriptions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h5>Support</h5>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h5>Payment Methods</h5>
+                <p style="font-size: 14px; color: #9ca3af;">We accept:</p>
+                <!-- Typing out the options listed in your reference photo -->
+                <div class="payment-methods-text">eSewa Khalti Visa Mastercard</div>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
