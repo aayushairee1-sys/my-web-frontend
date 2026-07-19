@@ -3,58 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Products | GSD Suppliers</title>
+    <title>Products | GSD Topup Ghar</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --bg-dark: #0b0c10;
+            --card-bg: #1f2833;
+            --primary: #6c5ce7;
+            --text-main: #ffffff;
+            --text-muted: #c5a880;
+            --accent: #00cec9;
+            --border-glow: rgba(108, 92, 231, 0.2);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background-color: #0b0c10;
-            color: #ffffff;
-            overflow-x: hidden;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100xl;
+            padding-bottom: 60px;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, #a855f7, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Navbar Navigation */
+        /* Header Navigation */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 8%;
-            background-color: rgba(11, 12, 16, 0.95);
+            background: rgba(11, 12, 16, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .logo {
+        .logo a {
             font-size: 24px;
             font-weight: 800;
-            letter-spacing: -0.5px;
+            color: #fff;
+            text-decoration: none;
         }
 
         .logo span {
-            color: #3b82f6;
+            color: var(--primary);
         }
 
         nav ul {
@@ -63,528 +67,293 @@
             gap: 30px;
         }
 
-        nav ul li a {
-            font-size: 14px;
+        nav a {
+            color: #fff;
+            text-decoration: none;
             font-weight: 600;
-            color: #9ca3af;
             transition: color 0.3s;
         }
 
-        nav ul li a:hover, nav ul li a.active {
-            color: #ffffff;
+        nav a:hover {
+            color: var(--primary);
         }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
+        /* Section Container */
+        .products-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
-        .login-btn {
-            background-color: #a855f7;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
         }
 
-        /* Content Container Layout */
-        .main-container {
-            padding: 40px 8%;
-        }
-
-        .page-title {
+        .section-header h1 {
             font-size: 36px;
             font-weight: 800;
             margin-bottom: 10px;
-            letter-spacing: -1px;
         }
 
-        .search-bar-container {
-            margin-bottom: 40px;
-            max-width: 400px;
-            position: relative;
+        .section-header p {
+            color: #a4b0be;
         }
 
-        .search-bar-container i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6b7280;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 12px 12px 12px 45px;
-            background-color: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
-            color: white;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .search-input:focus {
-            border-color: #a855f7;
-        }
-
-        /* Section Breakdown Styling */
-        .product-section {
-            margin-bottom: 60px;
-        }
-
-        .section-heading {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 25px;
-            border-left: 4px solid #a855f7;
-            padding-left: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Grid Display Structure */
+        /* Products Grid */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
+        /* Product Card Design */
         .product-card {
-            background: rgba(255, 255, 255, 0.02);
+            background: #15161e;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 14px;
-            padding: 16px;
-            position: relative;
-            transition: border-color 0.3s, transform 0.3s;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
         .product-card:hover {
-            border-color: rgba(168, 85, 247, 0.3);
-            transform: translateY(-4px);
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.15);
         }
 
-        .badge-container {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            display: flex;
-            gap: 6px;
-            z-index: 2;
+        .product-icon {
+            font-size: 45px;
+            color: var(--primary);
+            margin-bottom: 15px;
         }
 
-        .badge {
-            font-size: 10px;
+        .product-icon.game-ff { color: #ff7675; }
+        .product-icon.game-pubg { color: #ffeaa7; }
+        .product-icon.game-ml { color: #74b9ff; }
+        .product-icon.net-icon { color: #e50914; }
+
+        .product-title {
+            font-size: 22px;
             font-weight: 700;
-            padding: 4px 8px;
-            border-radius: 6px;
-            text-transform: uppercase;
+            margin-bottom: 10px;
         }
 
-        .badge-best { background-color: #22c55e; color: white; }
-        .badge-feat { background-color: #a855f7; color: white; }
+        .product-tag {
+            font-size: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 12px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #a4b0be;
+        }
 
-        .image-wrapper {
+        /* Option Dropdowns */
+        .select-box {
             width: 100%;
-            height: 160px;
+            padding: 12px 15px;
+            background: #1e202b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            background-color: #16181f;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.02);
-        }
-
-        /* Glowing graphic fallbacks imitating posters */
-        .graphic-icon {
-            font-size: 48px;
-            background: linear-gradient(135deg, #a855f7, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 0px 8px rgba(168, 85, 247, 0.5));
-        }
-
-        .info-row h4 {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            color: #f3f4f6;
-        }
-
-        .rating-box {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            color: #fab005;
-            margin-bottom: 15px;
-        }
-
-        .rating-box span {
-            color: #9ca3af;
-        }
-
-        .action-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-        }
-
-        .price-label {
-            font-size: 18px;
-            font-weight: 800;
-            color: #a855f7;
-        }
-
-        .buy-now-btn {
-            background-color: rgba(168, 85, 247, 0.1);
-            border: 1px solid #a855f7;
-            color: #ffffff;
-            font-size: 12px;
-            font-weight: 600;
-            padding: 6px 14px;
-            border-radius: 20px;
-            transition: background 0.3s;
-        }
-
-        .buy-now-btn:hover {
-            background-color: #a855f7;
-        }
-
-        /* Footer Custom View */
-        footer {
-            background-color: #07080c;
-            padding: 60px 8% 40px 8%;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 40px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-about p {
+            color: #fff;
             font-size: 14px;
-            color: #9ca3af;
-            margin: 15px 0;
-            line-height: 1.6;
+            font-weight: 600;
+            outline: none;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: border-color 0.3s;
         }
 
-        .social-links {
-            display: flex;
-            gap: 15px;
+        .select-box:focus {
+            border-color: var(--primary);
         }
 
-        .social-links a {
-            color: #9ca3af;
-            font-size: 18px;
-        }
-
-        .footer-column h5 {
-            font-size: 16px;
-            font-weight: 700;
+        /* Pricing Display */
+        .price-display {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--accent);
             margin-bottom: 20px;
         }
 
-        .footer-column ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            font-size: 14px;
-            color: #9ca3af;
+        /* Action Buttons */
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 12px;
+            transition: background 0.3s, transform 0.2s;
         }
 
-        .payment-list {
-            font-size: 14px;
-            color: #9ca3af;
-            margin-top: 10px;
-            font-weight: 600;
-            word-spacing: 6px;
+        .buy-btn:hover {
+            background: #5b4cc4;
         }
 
-        @media(max-width: 1024px) {
-            .products-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid { grid-template-columns: 1fr; }
-        }
-        @media(max-width: 600px) {
-            .products-grid { grid-template-columns: 1fr; }
-            header { flex-direction: column; gap: 15px; }
+        .buy-btn:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
 <body>
 
-    <!-- Header / Navbar Setup -->
+    <!-- Header Navigation -->
     <header>
-        <div class="logo">GSD <span>Suppliers</span></div>
+        <div class="logo"><a href="index.html">GSD <span>Suppliers</span></a></div>
         <nav>
             <ul>
-                <li><a href="#" class="active">Products</a></li>
-                <li><a href="#">Gaming Top-ups</a></li>
-                <li><a href="#">Gift Cards</a></li>
-                <li><a href="#">Subscriptions</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html" style="color: var(--primary);">Products</a></li>
             </ul>
         </nav>
-        <div class="nav-right">
-            <a href="#" class="login-btn">Login</a>
-        </div>
     </header>
 
-    <div class="main-container">
-        <h1 class="page-title">All Products</h1>
-        <div class="search-bar-container">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" class="search-input" placeholder="Search products...">
+    <!-- Main Content Area -->
+    <div class="products-container">
+        <div class="section-header">
+            <h1>GSD Topup Products</h1>
+            <p>Select your packet option to instantly view prices and request a safe UID topup.</p>
         </div>
 
-        <!-- ================= SECTION 1: PUBG MOBILE UC ================= -->
-        <div class="product-section">
-            <h3 class="section-heading"><i class="fa-solid fa-crosshairs"></i> PUBG Mobile UC Rates</h3>
-            <div class="products-grid">
-                
-                <!-- 60 UC -->
-                <div class="product-card">
-                    <div class="badge-container">
-                        <span class="badge badge-best">Best Seller</span>
-                        <span class="badge badge-feat">Featured</span>
-                    </div>
-                    <div class="image-wrapper">
-                        <div class="graphic-icon"><i class="fa-solid fa-coins"></i></div>
-                    </div>
-                    <div class="info-row">
-                        <h4>PUBG Mobile 60 UC</h4>
-                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.7 <span>(180)</span></div>
-                    </div>
-                    <div class="action-row">
-                        <div class="price-label">Rs. 150</div>
-                        <button class="buy-now-btn">Buy Now</button>
-                    </div>
-                </div>
+        <div class="products-grid">
 
-                <!-- 120 UC -->
-                <div class="product-card">
-                    <div class="image-wrapper">
-                        <div class="graphic-icon"><i class="fa-solid fa-coins"></i></div>
-                    </div>
-                    <div class="info-row">
-                        <h4>PUBG Mobile 120 UC</h4>
-                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.8 <span>(110)</span></div>
-                    </div>
-                    <div class="action-row">
-                        <div class="price-label">Rs. 300</div>
-                        <button class="buy-now-btn">Buy Now</button>
-                    </div>
+            <!-- 1. FREE FIRE CARD -->
+            <div class="product-card">
+                <div>
+                    <div class="product-icon game-ff"><i class="fa-solid fa-fire"></i></div>
+                    <div class="product-title">Free Fire Diamonds</div>
+                    <div class="product-tag">UID Topup Only</div>
+                    
+                    <select class="select-box" id="ff-select" onchange="updatePrice('ff')">
+                        <!-- Diamonds -->
+                        <option value="30">25 Diamonds</option>
+                        <option value="50">50 Diamonds</option>
+                        <option value="100">100 Diamonds</option>
+                        <option value="105">115 Diamonds</option>
+                        <option value="210">240 Diamonds</option>
+                        <option value="315">355 Diamonds</option>
+                        <option value="420">480 Diamonds</option>
+                        <option value="525">610 Diamonds</option>
+                        <option value="630">725 Diamonds</option>
+                        <option value="735">850 Diamonds</option>
+                        <option value="840">965 Diamonds</option>
+                        <option value="945">1090 Diamonds</option>
+                        <option value="1050">1240 Diamonds</option>
+                        <option value="1290">1505 Diamonds</option>
+                        <option value="1780">2090 Diamonds</option>
+                        <option value="2100">2530 Diamonds</option>
+                        <option value="2520">3010 Diamonds</option>
+                        <option value="4200">5060 Diamonds</option>
+                        <option value="5200">6300 Diamonds</option>
+                        <option value="8350">10120 Diamonds</option>
+                        <!-- Passes -->
+                        <option value="60">Weekly Lite (90💎)</option>
+                        <option value="210">Weekly Pass (445💎)</option>
+                        <option value="1040">Monthly Pass (2500💎)</option>
+                        <option value="540">Level - Pass (1270💎)</option>
+                    </select>
                 </div>
-
-                <!-- 325 UC -->
-                <div class="product-card">
-                    <div class="badge-container">
-                        <span class="badge badge-best">Best Seller</span>
-                    </div>
-                    <div class="image-wrapper">
-                        <div class="graphic-icon"><i class="fa-solid fa-coins"></i></div>
-                    </div>
-                    <div class="info-row">
-                        <h4>PUBG Mobile 325 UC</h4>
-                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.8 <span>(190)</span></div>
-                    </div>
-                    <div class="action-row">
-                        <div class="price-label">Rs. 750</div>
-                        <button class="buy-now-btn">Buy Now</button>
-                    </div>
+                <div>
+                    <div class="price-display" id="ff-price">Rs. 30</div>
+                    <a href="https://wa.me/9743712703" target="_blank" class="buy-btn">Buy Now</a>
                 </div>
-
-                <!-- 660 UC -->
-                <div class="product-card">
-                    <div class="image-wrapper">
-                        <div class="graphic-icon"><i class="fa-solid fa-coins"></i></div>
-                    </div>
-                    <div class="info-row">
-                        <h4>PUBG Mobile 660 UC</h4>
-                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.9 <span>(230)</span></div>
-                    </div>
-                    <div class="action-row">
-                        <div class="price-label">Rs. 1500</div>
-                        <button class="buy-now-btn">Buy Now</button>
-                    </div>
-                </div>
-
             </div>
-        </div>
 
-        <!-- ================= SECTION 2: MOBILE LEGENDS ================= -->
-        <div class="product-section">
-            <h3 class="section-heading"><i class="fa-solid fa-gem"></i> Mobile Legends Rates</h3>
-            <div class="products-grid">
-                
-                <!-- 50 + 5 Diamonds -->
-                <div class="product-card">
-                    <div class="badge-container">
-                        <span class="badge badge-feat">2X Bonus</span>
-                    </div>
-                    <div class="image-wrapper">
-                        <div class="graphic-icon" style="background: linear-gradient(135deg, #00d2ff, #0066ff); -webkit-background-clip: text;"><i class="fa-solid fa-diamond"></i></div>
-                    </div>
-                    <div class="info-row">
-                        <h4>MLBB 50 + 5 Diamonds</h4>
-                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.6 <span>(95)</span></div>
-                    </div>
-                    <div class="action-row">
-                        <div class="price-label">Rs. 135</div>
-                        <button class="buy-now-btn">Buy Now</button>
-                    </div>
+            <!-- 2. PUBG MOBILE CARD -->
+            <div class="product-card">
+                <div>
+                    <div class="product-icon game-pubg"><i class="fa-solid fa-gun"></i></div>
+                    <div class="product-title">PUBG Mobile UC</div>
+                    <div class="product-tag">UID Method</div>
+                    
+                    <select class="select-box" id="pubg-select" onchange="updatePrice('pubg')">
+                        <option value="150">60 UC</option>
+                        <option value="300">120 UC</option>
+                        <option value="600">240 UC</option>
+                        <option value="750">325 UC</option>
+                        <option value="1500">660 UC</option>
+                        <option value="1650">720 UC</option>
+                        <option value="3750">1800 UC</option>
+                        <option value="7500">3850 UC</option>
+                        <option value="14500">8100 UC</option>
+                        <option value="29000">16200 UC</option>
+                    </select>
                 </div>
-
-                <!-- 172 Diamonds -->
-                <div class="product-card">
-                    <div class="badge-container">
-                        <span class="badge badge-best">Normal</span>
-                    </div>
-                    <div class="image-wrapper">
-                        <div class="graphic-icon" style="background: linear-gradient(135deg, #00d2ff, #0066ff); -webkit-background-clip: text;"><i class="fa-solid fa-diamond"></i></div>
-                    </div>
-                    <div class="info-row">
-                        <h4>MLBB 172 Diamonds</h4>
-                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.7 <span>(140)</span></div>
-                    </div>
-                    <div class="action-row">
-                        <div class="price-label">Rs. 440</div>
-                        <button class="buy-now-btn">Buy Now</button>
-                    </div>
+                <div>
+                    <div class="price-display" id="pubg-price">Rs. 150</div>
+                    <a href="https://wa.me/9743712703" target="_blank" class="buy-btn">Buy Now</a>
                 </div>
-
-                <!-- Weekly Pass -->
-                <div class="product-card">
-                    <div class="badge-container">
-                        <span class="badge badge-best">Best Value</span>
-                    </div>
-                    <div class="image-wrapper">
-                        <div class="graphic-icon" style="background: linear-gradient(135deg, #11998e, #38ef7d); -webkit-background-clip: text;"><i class="fa-solid fa-id-card"></i></div>
-                    </div>
-                    <div class="info-row">
-                        <h4>MLBB Weekly Ticket Pass</h4>
-                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.9 <span>(410)</span></div>
-                    </div>
-                    <div class="action-row">
-                        <div class="price-label">Rs. 260</div>
-                        <button class="buy-now-btn">Buy Now</button>
-                    </div>
-                </div>
-
-                <!-- Twilight Pass -->
-                <div class="product-card">
-                    <div class="image-wrapper">
-                        <div class="graphic-icon" style="background: linear-gradient(135deg, #8e2de2, #4a00e0); -webkit-background-clip: text;"><i class="fa-solid fa-moon"></i></div>
-                    </div>
-                    <div class="info-row">
-                        <h4>MLBB Twilight Premium Pass</h4>
-                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.8 <span>(185)</span></div>
-                    </div>
-                    <div class="action-row">
-                        <div class="price-label">Rs. 1400</div>
-                        <button class="buy-now-btn">Buy Now</button>
-                    </div>
-                </div>
-
             </div>
-        </div>
 
-        <!-- ================= SECTION 3: NETFLIX SUBSCRIPTIONS ================= -->
-        <div class="product-section">
-            <h3 class="section-heading"><i class="fa-solid fa-film"></i> Netflix Premium (4K Ultra HD)</h3>
-            <div class="products-grid">
-                
-                <!-- 1 Month Screen -->
-                <div class="product-card">
-                    <div class="badge-container">
-                        <span class="badge badge-feat">Single Screen</span>
-                    </div>
-                    <div class="image-wrapper">
-                        <div class="graphic-icon" style="color: #e50914; -webkit-text-fill-color: #e50914; filter: drop-shadow(0px 0px 8px rgba(229, 9, 20, 0.4));"><i class="fa-solid fa-tv"></i></div>
-                    </div>
-                    <div class="info-row">
-                        <h4>Netflix Premium - 1 Month</h4>
-                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.9 <span>(510)</span></div>
-                    </div>
-                    <div class="action-row">
-                        <div class="price-label">Rs. 350</div>
-                        <button class="buy-now-btn">Buy Now</button>
-                    </div>
+            <!-- 3. MOBILE LEGENDS CARD -->
+            <div class="product-card">
+                <div>
+                    <div class="product-icon game-ml"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="product-title">Mobile Legends</div>
+                    <div class="product-tag">UID Rate List</div>
+                    
+                    <select class="select-box" id="ml-select" onchange="updatePrice('ml')">
+                        <!-- 2X Bonus Options -->
+                        <option value="135">50 + 5 Diamonds (2X Bonus)</option>
+                        <option value="400">150 + 15 Diamonds (2X Bonus)</option>
+                        <option value="650">250 + 25 Diamonds (2X Bonus)</option>
+                        <option value="1340">500 + 65 Diamonds (2X Bonus)</option>
+                        <!-- Normal Options -->
+                        <option value="220">86 Diamonds (Normal)</option>
+                        <option value="440">172 Diamonds (Normal)</option>
+                        <option value="600">257 Diamonds (Normal)</option>
+                        <option value="1650">706 Diamonds (Normal)</option>
+                        <option value="5080">2195 Diamonds (Normal)</option>
+                        <!-- Passes -->
+                        <option value="260">Weekly Pass</option>
+                        <option value="1400">Twilight Pass</option>
+                    </select>
                 </div>
-
-                <!-- 3 Month Screen -->
-                <div class="product-card">
-                    <div class="badge-container">
-                        <span class="badge badge-best">Best Seller</span>
-                    </div>
-                    <div class="image-wrapper">
-                        <div class="graphic-icon" style="color: #e50914; -webkit-text-fill-color: #e50914; filter: drop-shadow(0px 0px 8px rgba(229, 9, 20, 0.4));"><i class="fa-solid fa-tv"></i></div>
-                    </div>
-                    <div class="info-row">
-                        <h4>Netflix Premium - 3 Months</h4>
-                        <div class="rating-box"><i class="fa-solid fa-star"></i> 4.9 <span>(680)</span></div>
-                    </div>
-                    <div class="action-row">
-                        <div class="price-label">Rs. 950</div>
-                        <button class="buy-now-btn">Buy Now</button>
-                    </div>
+                <div>
+                    <div class="price-display" id="ml-price">Rs. 135</div>
+                    <a href="https://wa.me/9743712703" target="_blank" class="buy-btn">Buy Now</a>
                 </div>
-
             </div>
-        </div>
 
+            <!-- 4. NETFLIX SUBSCRIPTIONS CARD -->
+            <div class="product-card">
+                <div>
+                    <div class="product-icon net-icon"><i class="fa-solid fa-tv"></i></div>
+                    <div class="product-title">Netflix Premium</div>
+                    <div class="product-tag">Single Screen | 4K Ultra HD</div>
+                    
+                    <select class="select-box" id="netflix-select" onchange="updatePrice('netflix')">
+                        <option value="350">1 Month Subscription</option>
+                        <option value="950">3 Months Subscription</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="price-display" id="netflix-price">Rs. 350</div>
+                    <a href="https://wa.me/9743712703" target="_blank" class="buy-btn">Buy Now</a>
+                </div>
+            </div>
+
+        </div>
     </div>
 
-    <!-- Footer Component Layout -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-about">
-                <div class="logo">GSD <span>Suppliers</span></div>
-                <p>Your premium dashboard portal for safe, trusted, and swift gaming currency top-ups and subscriptions.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-solid fa-envelope"></i></a>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h5>Quick Links</h5>
-                <ul>
-                    <li>All Products</li>
-                    <li>Gaming Top-ups</li>
-                    <li>Gift Cards</li>
-                    <li>Subscriptions</li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h5>Support</h5>
-                <ul>
-                    <li>Contact Us</li>
-                    <li>FAQ Helpdesk</li>
-                    <li>Terms of Service</li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h5>Payment Methods</h5>
-                <p style="font-size: 14px; color: #9ca3af;">We accept:</p>
-                <div class="payment-list">eSewa Khalti Visa Mastercard</div>
-            </div>
-        </div>
-        <p style="text-align: center; color: #4b5563; font-size: 13px; margin-top: 20px;">&copy; 2026 GSD Suppliers. All rights reserved.</p>
-    </footer>
+    <!-- Interactive Price Update Script -->
+    <script>
+        function updatePrice(productKey) {
+            var selectElement = document.getElementById(productKey + '-select');
+            var priceElement = document.getElementById(productKey + '-price');
+            var selectValue = selectElement.value;
+            
+            priceElement.innerText = "Rs. " + selectValue;
+        }
+    </script>
 
 </body>
 </html>
