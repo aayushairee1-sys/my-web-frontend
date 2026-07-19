@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products | GSD Topup Ghar</title>
+    <title>Products | GSD Suppliers</title>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -13,13 +13,15 @@
 
     <style>
         :root {
-            --bg-dark: #0b0c10;
-            --card-bg: #1f2833;
-            --primary: #6c5ce7;
+            --bg-dark: #08090c;
+            --bg-card: #111319;
+            --bg-input: #1b1e26;
+            --primary: #ffb800; /* Premium Gamer Gold */
+            --primary-glow: rgba(255, 184, 0, 0.15);
             --text-main: #ffffff;
-            --text-muted: #c5a880;
-            --accent: #00cec9;
-            --border-glow: rgba(108, 92, 231, 0.2);
+            --text-muted: #8a92a6;
+            --accent-green: #00e676;
+            --accent-red: #e50914;
         }
 
         * {
@@ -32,18 +34,18 @@
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
-            min-height: 100xl;
-            padding-bottom: 60px;
+            min-height: 100vh;
+            padding-bottom: 80px;
         }
 
-        /* Header Navigation */
+        /* Premium Header Navigation */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 8%;
-            background: rgba(11, 12, 16, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(17, 19, 25, 0.95);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             position: sticky;
             top: 0;
@@ -51,10 +53,11 @@
         }
 
         .logo a {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
             color: #fff;
             text-decoration: none;
+            letter-spacing: 0.5px;
         }
 
         .logo span {
@@ -68,138 +71,228 @@
         }
 
         nav a {
-            color: #fff;
+            color: var(--text-muted);
             text-decoration: none;
             font-weight: 600;
+            font-size: 15px;
             transition: color 0.3s;
         }
 
-        nav a:hover {
+        nav a:hover, nav a.active {
             color: var(--primary);
         }
 
-        /* Section Container */
-        .products-container {
+        /* Store Section Container */
+        .store-container {
             max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin: 50px auto;
+            padding: 0 24px;
         }
 
-        .section-header {
+        .store-header {
             text-align: center;
             margin-bottom: 50px;
         }
 
-        .section-header h1 {
-            font-size: 36px;
+        .store-header h1 {
+            font-size: 34px;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
 
-        .section-header p {
-            color: #a4b0be;
+        .store-header h1 span {
+            color: var(--primary);
         }
 
-        /* Products Grid */
+        .store-header p {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        /* Premium Gaming Products Grid */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 25px;
         }
 
-        /* Product Card Design */
+        /* Product Card */
         .product-card {
-            background: #15161e;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: relative;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s, box-shadow 0.3s;
+            overflow: hidden;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.15);
+            transform: translateY(-6px);
+            border-color: rgba(255, 184, 0, 0.3);
+            box-shadow: 0 12px 30px var(--primary-glow);
         }
 
-        .product-icon {
-            font-size: 45px;
-            color: var(--primary);
+        /* Card Top Tags */
+        .card-status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 15px;
         }
 
-        .product-icon.game-ff { color: #ff7675; }
-        .product-icon.game-pubg { color: #ffeaa7; }
-        .product-icon.game-ml { color: #74b9ff; }
-        .product-icon.net-icon { color: #e50914; }
-
-        .product-title {
-            font-size: 22px;
+        .type-tag {
+            font-size: 11px;
             font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .product-tag {
-            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
             background: rgba(255, 255, 255, 0.05);
-            padding: 4px 12px;
-            border-radius: 50px;
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #a4b0be;
+            padding: 4px 10px;
+            border-radius: 6px;
         }
 
-        /* Option Dropdowns */
-        .select-box {
+        .status-tag {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-tag i {
+            font-size: 8px;
+        }
+
+        /* Graphic/Icon Container */
+        .image-container {
             width: 100%;
-            padding: 12px 15px;
-            background: #1e202b;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: 140px;
+            background: var(--bg-input);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 18px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .image-container i {
+            font-size: 50px;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .image-container i {
+            transform: scale(1.1);
+        }
+
+        /* Custom game colors matching store aesthetics */
+        .icon-ff { color: #ff4757; }
+        .icon-pubg { color: #ffa502; }
+        .icon-ml { color: #2ed573; }
+        .icon-netflix { color: var(--accent-red); }
+
+        .product-info h3 {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        /* Custom Control Select Items */
+        .select-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .game-select {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-input);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 10px;
             color: #fff;
             font-size: 14px;
             font-weight: 600;
             outline: none;
-            margin-bottom: 20px;
             cursor: pointer;
+            appearance: none;
             transition: border-color 0.3s;
         }
 
-        .select-box:focus {
+        .game-select:focus {
             border-color: var(--primary);
         }
 
-        /* Pricing Display */
-        .price-display {
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--accent);
-            margin-bottom: 20px;
+        .select-wrapper::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            pointer-events: none;
         }
 
-        /* Action Buttons */
-        .buy-btn {
-            display: block;
-            width: 100%;
-            padding: 14px;
+        /* Price & Action Elements */
+        .card-footer {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .price-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-box span {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .dynamic-price {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .action-buy-btn {
+            flex-grow: 1;
+            padding: 12px;
             background: var(--primary);
-            color: #fff;
+            color: #000;
+            text-align: center;
             text-decoration: none;
             font-weight: 700;
-            border-radius: 12px;
-            transition: background 0.3s, transform 0.2s;
+            font-size: 14px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: background 0.2s, transform 0.2s;
         }
 
-        .buy-btn:hover {
-            background: #5b4cc4;
+        .action-buy-btn:hover {
+            background: #e6a600;
+            transform: translateY(-1px);
         }
 
-        .buy-btn:active {
-            transform: scale(0.98);
+        .action-buy-btn:active {
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -211,16 +304,16 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="products.html" style="color: var(--primary);">Products</a></li>
+                <li><a href="products.html" class="active">Products</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Main Content Area -->
-    <div class="products-container">
-        <div class="section-header">
-            <h1>GSD Topup Products</h1>
-            <p>Select your packet option to instantly view prices and request a safe UID topup.</p>
+    <!-- Store Section Container -->
+    <div class="store-container">
+        <div class="store-header">
+            <h1>Browse <span>Products</span></h1>
+            <p>Game top-ups & digital subscriptions — safe and instant instant delivery via GSD Suppliers</p>
         </div>
 
         <div class="products-grid">
@@ -228,132 +321,181 @@
             <!-- 1. FREE FIRE CARD -->
             <div class="product-card">
                 <div>
-                    <div class="product-icon game-ff"><i class="fa-solid fa-fire"></i></div>
-                    <div class="product-title">Free Fire Diamonds</div>
-                    <div class="product-tag">UID Topup Only</div>
-                    
-                    <select class="select-box" id="ff-select" onchange="updatePrice('ff')">
-                        <!-- Diamonds -->
-                        <option value="30">25 Diamonds</option>
-                        <option value="50">50 Diamonds</option>
-                        <option value="100">100 Diamonds</option>
-                        <option value="105">115 Diamonds</option>
-                        <option value="210">240 Diamonds</option>
-                        <option value="315">355 Diamonds</option>
-                        <option value="420">480 Diamonds</option>
-                        <option value="525">610 Diamonds</option>
-                        <option value="630">725 Diamonds</option>
-                        <option value="735">850 Diamonds</option>
-                        <option value="840">965 Diamonds</option>
-                        <option value="945">1090 Diamonds</option>
-                        <option value="1050">1240 Diamonds</option>
-                        <option value="1290">1505 Diamonds</option>
-                        <option value="1780">2090 Diamonds</option>
-                        <option value="2100">2530 Diamonds</option>
-                        <option value="2520">3010 Diamonds</option>
-                        <option value="4200">5060 Diamonds</option>
-                        <option value="5200">6300 Diamonds</option>
-                        <option value="8350">10120 Diamonds</option>
-                        <!-- Passes -->
-                        <option value="60">Weekly Lite (90💎)</option>
-                        <option value="210">Weekly Pass (445💎)</option>
-                        <option value="1040">Monthly Pass (2500💎)</option>
-                        <option value="540">Level - Pass (1270💎)</option>
-                    </select>
+                    <div class="card-status-row">
+                        <div class="type-tag">Topup</div>
+                        <div class="status-tag"><i class="fa-solid fa-circle"></i> Available</div>
+                    </div>
+                    <div class="image-container">
+                        <i class="fa-solid fa-fire icon-ff"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Free Fire Diamond</h3>
+                    </div>
+                    <div class="select-wrapper">
+                        <select class="game-select" id="ff-select" onchange="updatePrice('ff')">
+                            <!-- Diamonds -->
+                            <option value="30">25 Diamonds</option>
+                            <option value="50">50 Diamonds</option>
+                            <option value="100">100 Diamonds</option>
+                            <option value="105">115 Diamonds</option>
+                            <option value="210">240 Diamonds</option>
+                            <option value="315">355 Diamonds</option>
+                            <option value="420">480 Diamonds</option>
+                            <option value="525">610 Diamonds</option>
+                            <option value="630">725 Diamonds</option>
+                            <option value="735">850 Diamonds</option>
+                            <option value="840">965 Diamonds</option>
+                            <option value="945">1090 Diamonds</option>
+                            <option value="1050">1240 Diamonds</option>
+                            <option value="1290">1505 Diamonds</option>
+                            <option value="1780">2090 Diamonds</option>
+                            <option value="2100">2530 Diamonds</option>
+                            <option value="2520">3010 Diamonds</option>
+                            <option value="4200">5060 Diamonds</option>
+                            <option value="5200">6300 Diamonds</option>
+                            <option value="8350">10120 Diamonds</option>
+                            <!-- Passes -->
+                            <option value="60">Weekly Lite (90💎)</option>
+                            <option value="210">Weekly Pass (445💎)</option>
+                            <option value="1040">Monthly Pass (2500💎)</option>
+                            <option value="540">Level - Pass (1270💎)</option>
+                        </select>
+                    </div>
                 </div>
-                <div>
-                    <div class="price-display" id="ff-price">Rs. 30</div>
-                    <a href="https://wa.me/9743712703" target="_blank" class="buy-btn">Buy Now</a>
+                <div class="card-footer">
+                    <div class="price-box">
+                        <span>Price</span>
+                        <div class="dynamic-price" id="ff-price">Rs. 30</div>
+                    </div>
+                    <a href="https://wa.me/9743712703" target="_blank" class="action-buy-btn">
+                        <i class="fa-solid fa-cart-shopping"></i> Buy Now
+                    </a>
                 </div>
             </div>
 
             <!-- 2. PUBG MOBILE CARD -->
             <div class="product-card">
                 <div>
-                    <div class="product-icon game-pubg"><i class="fa-solid fa-gun"></i></div>
-                    <div class="product-title">PUBG Mobile UC</div>
-                    <div class="product-tag">UID Method</div>
-                    
-                    <select class="select-box" id="pubg-select" onchange="updatePrice('pubg')">
-                        <option value="150">60 UC</option>
-                        <option value="300">120 UC</option>
-                        <option value="600">240 UC</option>
-                        <option value="750">325 UC</option>
-                        <option value="1500">660 UC</option>
-                        <option value="1650">720 UC</option>
-                        <option value="3750">1800 UC</option>
-                        <option value="7500">3850 UC</option>
-                        <option value="14500">8100 UC</option>
-                        <option value="29000">16200 UC</option>
-                    </select>
+                    <div class="card-status-row">
+                        <div class="type-tag">Topup</div>
+                        <div class="status-tag"><i class="fa-solid fa-circle"></i> Available</div>
+                    </div>
+                    <div class="image-container">
+                        <i class="fa-solid fa-gun icon-pubg"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>PUBG UC</h3>
+                    </div>
+                    <div class="select-wrapper">
+                        <select class="game-select" id="pubg-select" onchange="updatePrice('pubg')">
+                            <option value="150">60 UC</option>
+                            <option value="300">120 UC</option>
+                            <option value="600">240 UC</option>
+                            <option value="750">325 UC</option>
+                            <option value="1500">660 UC</option>
+                            <option value="1650">720 UC</option>
+                            <option value="3750">1800 UC</option>
+                            <option value="7500">3850 UC</option>
+                            <option value="14500">8100 UC</option>
+                            <option value="29000">16200 UC</option>
+                        </select>
+                    </div>
                 </div>
-                <div>
-                    <div class="price-display" id="pubg-price">Rs. 150</div>
-                    <a href="https://wa.me/9743712703" target="_blank" class="buy-btn">Buy Now</a>
+                <div class="card-footer">
+                    <div class="price-box">
+                        <span>Price</span>
+                        <div class="dynamic-price" id="pubg-price">Rs. 150</div>
+                    </div>
+                    <a href="https://wa.me/9743712703" target="_blank" class="action-buy-btn">
+                        <i class="fa-solid fa-cart-shopping"></i> Buy Now
+                    </a>
                 </div>
             </div>
 
             <!-- 3. MOBILE LEGENDS CARD -->
             <div class="product-card">
                 <div>
-                    <div class="product-icon game-ml"><i class="fa-solid fa-shield-halved"></i></div>
-                    <div class="product-title">Mobile Legends</div>
-                    <div class="product-tag">UID Rate List</div>
-                    
-                    <select class="select-box" id="ml-select" onchange="updatePrice('ml')">
-                        <!-- 2X Bonus Options -->
-                        <option value="135">50 + 5 Diamonds (2X Bonus)</option>
-                        <option value="400">150 + 15 Diamonds (2X Bonus)</option>
-                        <option value="650">250 + 25 Diamonds (2X Bonus)</option>
-                        <option value="1340">500 + 65 Diamonds (2X Bonus)</option>
-                        <!-- Normal Options -->
-                        <option value="220">86 Diamonds (Normal)</option>
-                        <option value="440">172 Diamonds (Normal)</option>
-                        <option value="600">257 Diamonds (Normal)</option>
-                        <option value="1650">706 Diamonds (Normal)</option>
-                        <option value="5080">2195 Diamonds (Normal)</option>
-                        <!-- Passes -->
-                        <option value="260">Weekly Pass</option>
-                        <option value="1400">Twilight Pass</option>
-                    </select>
+                    <div class="card-status-row">
+                        <div class="type-tag">Topup</div>
+                        <div class="status-tag"><i class="fa-solid fa-circle"></i> Available</div>
+                    </div>
+                    <div class="image-container">
+                        <i class="fa-solid fa-shield-halved icon-ml"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Mobile Legends Diamond</h3>
+                    </div>
+                    <div class="select-wrapper">
+                        <select class="game-select" id="ml-select" onchange="updatePrice('ml')">
+                            <!-- 2X Bonus -->
+                            <option value="135">50 + 5 Diamonds (2X Bonus)</option>
+                            <option value="400">150 + 15 Diamonds (2X Bonus)</option>
+                            <option value="650">250 + 25 Diamonds (2X Bonus)</option>
+                            <option value="1340">500 + 65 Diamonds (2X Bonus)</option>
+                            <!-- Normal -->
+                            <option value="220">86 Diamonds (Normal)</option>
+                            <option value="440">172 Diamonds (Normal)</option>
+                            <option value="600">257 Diamonds (Normal)</option>
+                            <option value="1650">706 Diamonds (Normal)</option>
+                            <option value="5080">2195 Diamonds (Normal)</option>
+                            <!-- Passes -->
+                            <option value="260">Weekly Pass</option>
+                            <option value="1400">Twilight Pass</option>
+                        </select>
+                    </div>
                 </div>
-                <div>
-                    <div class="price-display" id="ml-price">Rs. 135</div>
-                    <a href="https://wa.me/9743712703" target="_blank" class="buy-btn">Buy Now</a>
+                <div class="card-footer">
+                    <div class="price-box">
+                        <span>Price</span>
+                        <div class="dynamic-price" id="ml-price">Rs. 135</div>
+                    </div>
+                    <a href="https://wa.me/9743712703" target="_blank" class="action-buy-btn">
+                        <i class="fa-solid fa-cart-shopping"></i> Buy Now
+                    </a>
                 </div>
             </div>
 
-            <!-- 4. NETFLIX SUBSCRIPTIONS CARD -->
+            <!-- 4. NETFLIX CARD -->
             <div class="product-card">
                 <div>
-                    <div class="product-icon net-icon"><i class="fa-solid fa-tv"></i></div>
-                    <div class="product-title">Netflix Premium</div>
-                    <div class="product-tag">Single Screen | 4K Ultra HD</div>
-                    
-                    <select class="select-box" id="netflix-select" onchange="updatePrice('netflix')">
-                        <option value="350">1 Month Subscription</option>
-                        <option value="950">3 Months Subscription</option>
-                    </select>
+                    <div class="card-status-row">
+                        <div class="type-tag">Subscription</div>
+                        <div class="status-tag"><i class="fa-solid fa-circle"></i> Available</div>
+                    </div>
+                    <div class="image-container">
+                        <i class="fa-solid fa-tv icon-netflix"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Netflix Subscription</h3>
+                    </div>
+                    <div class="select-wrapper">
+                        <select class="game-select" id="netflix-select" onchange="updatePrice('netflix')">
+                            <option value="350">1 Month Premium (4K Ultra HD)</option>
+                            <option value="950">3 Months Premium (4K Ultra HD)</option>
+                        </select>
+                    </div>
                 </div>
-                <div>
-                    <div class="price-display" id="netflix-price">Rs. 350</div>
-                    <a href="https://wa.me/9743712703" target="_blank" class="buy-btn">Buy Now</a>
+                <div class="card-footer">
+                    <div class="price-box">
+                        <span>Price</span>
+                        <div class="dynamic-price" id="netflix-price">Rs. 350</div>
+                    </div>
+                    <a href="https://wa.me/9743712703" target="_blank" class="action-buy-btn">
+                        <i class="fa-solid fa-cart-shopping"></i> Buy Now
+                    </a>
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- Interactive Price Update Script -->
+    <!-- Script logic for dynamic pricing -->
     <script>
-        function updatePrice(productKey) {
-            var selectElement = document.getElementById(productKey + '-select');
-            var priceElement = document.getElementById(productKey + '-price');
-            var selectValue = selectElement.value;
-            
-            priceElement.innerText = "Rs. " + selectValue;
+        function updatePrice(id) {
+            var select = document.getElementById(id + '-select');
+            var price = document.getElementById(id + '-price');
+            price.innerText = "Rs. " + select.value;
         }
     </script>
-
 </body>
 </html>
