@@ -13,8 +13,8 @@
 
     <style>
         :root {
-            --bg-dark: #08090c;
-            --bg-card: #111319;
+            --bg-dark: #060709;
+            --bg-card: rgba(17, 19, 25, 0.85);
             --bg-input: #1b1e26;
             --primary: #ffb800; /* Premium Gamer Gold */
             --primary-glow: rgba(255, 184, 0, 0.15);
@@ -33,18 +33,25 @@
 
         body {
             background-color: var(--bg-dark);
+            /* Matching gaming grid overlay background pattern */
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(255, 184, 0, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 10% 80%, rgba(108, 92, 231, 0.08) 0%, transparent 40%),
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
             color: var(--text-main);
             min-height: 100vh;
             padding-bottom: 80px;
         }
 
-        /* Premium Header Navigation */
+        /* Premium Navigation Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 8%;
-            background: rgba(17, 19, 25, 0.95);
+            background: rgba(17, 19, 25, 0.85);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             position: sticky;
@@ -82,11 +89,26 @@
             color: var(--primary);
         }
 
-        /* Store Section Container */
+        /* Store Section Layout */
         .store-container {
             max-width: 1200px;
             margin: 50px auto;
             padding: 0 24px;
+            position: relative;
+        }
+
+        .store-container::before {
+            content: "PRODUCTS";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 110px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.01);
+            z-index: -1;
+            letter-spacing: 8px;
+            user-select: none;
         }
 
         .store-header {
@@ -117,9 +139,10 @@
             gap: 25px;
         }
 
-        /* Product Card */
+        /* Product Card Design */
         .product-card {
             background: var(--bg-card);
+            backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 16px;
             padding: 20px;
@@ -137,7 +160,7 @@
             box-shadow: 0 12px 30px var(--primary-glow);
         }
 
-        /* Card Top Tags */
+        /* Card Tags */
         .card-status-row {
             display: flex;
             justify-content: space-between;
@@ -169,7 +192,7 @@
             font-size: 8px;
         }
 
-        /* Graphic/Icon Container */
+        /* Art/Graphics Box Layer */
         .image-container {
             width: 100%;
             height: 140px;
@@ -192,7 +215,7 @@
             transform: scale(1.1);
         }
 
-        /* Custom game colors matching store aesthetics */
+        /* Branding Game Accent Highlights */
         .icon-ff { color: #ff4757; }
         .icon-pubg { color: #ffa502; }
         .icon-ml { color: #2ed573; }
@@ -205,7 +228,7 @@
             color: #fff;
         }
 
-        /* Custom Control Select Items */
+        /* Options Dropdown Selection */
         .select-wrapper {
             position: relative;
             margin-bottom: 15px;
@@ -242,7 +265,7 @@
             pointer-events: none;
         }
 
-        /* Price & Action Elements */
+        /* Price Panel Output */
         .card-footer {
             margin-top: 10px;
             display: flex;
@@ -290,15 +313,11 @@
             background: #e6a600;
             transform: translateY(-1px);
         }
-
-        .action-buy-btn:active {
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
+    <!-- Header Navigation Bar -->
     <header>
         <div class="logo"><a href="index.html">GSD <span>Suppliers</span></a></div>
         <nav>
@@ -309,16 +328,16 @@
         </nav>
     </header>
 
-    <!-- Store Section Container -->
+    <!-- Main Store Catalog Area -->
     <div class="store-container">
         <div class="store-header">
             <h1>Browse <span>Products</span></h1>
-            <p>Game top-ups & digital subscriptions — safe and instant instant delivery via GSD Suppliers</p>
+            <p>Game top-ups & digital subscriptions — secure delivery by GSD Suppliers</p>
         </div>
 
         <div class="products-grid">
 
-            <!-- 1. FREE FIRE CARD -->
+            <!-- Free Fire Item Block -->
             <div class="product-card">
                 <div>
                     <div class="card-status-row">
@@ -333,7 +352,6 @@
                     </div>
                     <div class="select-wrapper">
                         <select class="game-select" id="ff-select" onchange="updatePrice('ff')">
-                            <!-- Diamonds -->
                             <option value="30">25 Diamonds</option>
                             <option value="50">50 Diamonds</option>
                             <option value="100">100 Diamonds</option>
@@ -354,7 +372,6 @@
                             <option value="4200">5060 Diamonds</option>
                             <option value="5200">6300 Diamonds</option>
                             <option value="8350">10120 Diamonds</option>
-                            <!-- Passes -->
                             <option value="60">Weekly Lite (90💎)</option>
                             <option value="210">Weekly Pass (445💎)</option>
                             <option value="1040">Monthly Pass (2500💎)</option>
@@ -373,7 +390,7 @@
                 </div>
             </div>
 
-            <!-- 2. PUBG MOBILE CARD -->
+            <!-- PUBG Mobile Item Block -->
             <div class="product-card">
                 <div>
                     <div class="card-status-row">
@@ -412,7 +429,7 @@
                 </div>
             </div>
 
-            <!-- 3. MOBILE LEGENDS CARD -->
+            <!-- Mobile Legends Item Block -->
             <div class="product-card">
                 <div>
                     <div class="card-status-row">
@@ -427,18 +444,15 @@
                     </div>
                     <div class="select-wrapper">
                         <select class="game-select" id="ml-select" onchange="updatePrice('ml')">
-                            <!-- 2X Bonus -->
                             <option value="135">50 + 5 Diamonds (2X Bonus)</option>
                             <option value="400">150 + 15 Diamonds (2X Bonus)</option>
                             <option value="650">250 + 25 Diamonds (2X Bonus)</option>
                             <option value="1340">500 + 65 Diamonds (2X Bonus)</option>
-                            <!-- Normal -->
                             <option value="220">86 Diamonds (Normal)</option>
                             <option value="440">172 Diamonds (Normal)</option>
                             <option value="600">257 Diamonds (Normal)</option>
                             <option value="1650">706 Diamonds (Normal)</option>
                             <option value="5080">2195 Diamonds (Normal)</option>
-                            <!-- Passes -->
                             <option value="260">Weekly Pass</option>
                             <option value="1400">Twilight Pass</option>
                         </select>
@@ -455,7 +469,7 @@
                 </div>
             </div>
 
-            <!-- 4. NETFLIX CARD -->
+            <!-- Netflix Subscription Item Block -->
             <div class="product-card">
                 <div>
                     <div class="card-status-row">
