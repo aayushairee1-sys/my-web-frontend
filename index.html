@@ -4,22 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GSD Suppliers | High-Performance TopUp</title>
+    <!-- Icons & High-Tech Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg: #050608;
+            --bg: #040508;
             --primary: #ffb800;
             --neon-blue: #00f0ff;
-            --neon-pink: #ff007f;
-            --card-bg: rgba(15, 17, 23, 0.75);
+            --card-bg: rgba(15, 17, 23, 0.7);
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            margin: 0; padding: 0; box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
@@ -28,26 +26,16 @@
             color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 20% 20%, rgba(255, 184, 0, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(0, 240, 255, 0.12) 0%, transparent 40%);
+            position: relative;
         }
 
-        /* Animated Grid Overlay */
-        .grid-bg {
+        /* Interactive Particle Canvas */
+        #particleCanvas {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 1;
             pointer-events: none;
-            z-index: 0;
-            animation: moveGrid 20s linear infinite;
-        }
-
-        @keyframes moveGrid {
-            0% { background-position: 0 0; }
-            100% { background-position: 50px 50px; }
         }
 
         /* Header */
@@ -58,7 +46,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 25px 8%;
-            background: rgba(8, 10, 15, 0.8);
+            background: rgba(8, 10, 15, 0.85);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
@@ -68,12 +56,11 @@
             font-size: 24px;
             font-weight: 900;
             letter-spacing: 1.5px;
-            text-transform: uppercase;
         }
 
         .logo span {
             color: var(--primary);
-            text-shadow: 0 0 12px rgba(255, 184, 0, 0.6);
+            text-shadow: 0 0 12px rgba(255, 184, 0, 0.8);
         }
 
         nav a {
@@ -86,28 +73,41 @@
 
         nav a:hover, nav a.active {
             color: var(--primary);
-            text-shadow: 0 0 8px rgba(255, 184, 0, 0.5);
+            text-shadow: 0 0 8px rgba(255, 184, 0, 0.6);
         }
 
-        /* Hero Section */
+        /* Hero Showcase */
         .hero {
             position: relative;
             z-index: 5;
             text-align: center;
-            padding: 100px 20px 60px 20px;
+            padding: 110px 20px 60px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
+        .hero-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--primary);
+            background: rgba(255, 184, 0, 0.1);
+            border: 1px solid rgba(255, 184, 0, 0.3);
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 15px rgba(255, 184, 0, 0.2);
+        }
+
         .hero-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 52px;
+            font-size: 56px;
             font-weight: 900;
             line-height: 1.2;
             text-transform: uppercase;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff 30%, var(--primary) 100%);
+            background: linear-gradient(135deg, #ffffff 30%, var(--primary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: pulseGlow 3s infinite alternate;
@@ -115,23 +115,24 @@
 
         @keyframes pulseGlow {
             0% { filter: drop-shadow(0 0 15px rgba(255, 184, 0, 0.2)); }
-            100% { filter: drop-shadow(0 0 35px rgba(255, 184, 0, 0.6)); }
+            100% { filter: drop-shadow(0 0 35px rgba(255, 184, 0, 0.7)); }
         }
 
         .hero-subtitle {
             color: #a0a6b5;
             font-size: 18px;
             max-width: 600px;
-            margin-bottom: 40px;
+            margin-bottom: 45px;
+            line-height: 1.6;
         }
 
-        /* Animated Action Button */
+        /* Cyberpunk Button */
         .btn-glow {
             position: relative;
-            padding: 16px 40px;
+            padding: 18px 42px;
             font-family: 'Orbitron', sans-serif;
             font-size: 16px;
-            font-weight: 800;
+            font-weight: 900;
             color: #000;
             background: var(--primary);
             border: none;
@@ -139,14 +140,15 @@
             cursor: pointer;
             text-decoration: none;
             text-transform: uppercase;
-            box-shadow: 0 0 25px rgba(255, 184, 0, 0.4);
+            box-shadow: 0 0 30px rgba(255, 184, 0, 0.5);
             transition: all 0.3s ease;
             animation: floatBtn 4s ease-in-out infinite;
         }
 
         .btn-glow:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 0 40px rgba(255, 184, 0, 0.8);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 50px rgba(255, 184, 0, 0.9);
+            background: #fff;
         }
 
         @keyframes floatBtn {
@@ -154,7 +156,7 @@
             50% { transform: translateY(-8px); }
         }
 
-        /* Animated Cards Section */
+        /* Card Showcase Grid */
         .grid-container {
             position: relative;
             z-index: 5;
@@ -166,12 +168,12 @@
             gap: 30px;
         }
 
+        /* Cyber Neon Card Border Animation */
         .animated-card {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
             border-radius: 20px;
             padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -182,9 +184,9 @@
             position: absolute;
             top: -50%; left: -50%; width: 200%; height: 200%;
             background: conic-gradient(transparent, transparent, transparent, var(--primary));
-            animation: rotateBorder 6s linear infinite;
+            animation: rotateBorder 4s linear infinite;
             z-index: -2;
-            opacity: 0;
+            opacity: 0.3;
             transition: opacity 0.3s;
         }
 
@@ -192,7 +194,7 @@
             content: '';
             position: absolute;
             inset: 2px;
-            background: #0f1117;
+            background: #0b0d13;
             border-radius: 18px;
             z-index: -1;
         }
@@ -202,8 +204,8 @@
         }
 
         .animated-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
         }
 
         @keyframes rotateBorder {
@@ -215,12 +217,13 @@
             font-size: 45px;
             color: var(--primary);
             margin-bottom: 20px;
-            animation: pulseIcon 2s infinite ease-in-out;
+            animation: pulseIcon 2.5s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(255, 184, 0, 0.4));
         }
 
         @keyframes pulseIcon {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50% { transform: scale(1.12); }
         }
 
         .card-title {
@@ -234,11 +237,16 @@
             font-size: 14px;
             line-height: 1.6;
         }
+
+        @media(max-width: 768px) {
+            .hero-title { font-size: 38px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="grid-bg"></div>
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
 
     <header>
         <div class="logo">GSD <span>Suppliers</span></div>
@@ -249,28 +257,81 @@
     </header>
 
     <section class="hero">
-        <h1 class="hero-title">NEXT-GEN GAMING<br>TOP UP HUB</h1>
-        <p class="hero-subtitle">Instant Free Fire Diamonds, PUBG UC & Subscriptions with automated UID processing.</p>
-        <a href="products.html" class="btn-glow"><i class="fa-solid fa-bolt"></i> ENTER STORE CATALOG</a>
+        <div class="hero-badge"><i class="fa-solid fa-bolt"></i> AUTOMATED TOP-UP HUB</div>
+        <h1 class="hero-title">NEXT-GEN GAMING<br>TOP UP STORE</h1>
+        <p class="hero-subtitle">Instant Free Fire Diamonds, PUBG UC & Subscriptions loaded directly via UID with maximum speed.</p>
+        <a href="products.html" class="btn-glow"><i class="fa-solid fa-gamepad"></i> ENTER STORE CATALOG</a>
     </section>
 
     <section class="grid-container">
         <div class="animated-card">
             <i class="fa-solid fa-bolt card-icon"></i>
             <h3 class="card-title">Instant Delivery</h3>
-            <p class="card-desc">Orders process directly via UID within minutes of verification.</p>
+            <p class="card-desc">Orders process directly via UID within minutes of purchase verification.</p>
         </div>
         <div class="animated-card">
             <i class="fa-solid fa-shield-halved card-icon"></i>
             <h3 class="card-title">100% Safe</h3>
-            <p class="card-desc">Fully legal in-game top-ups directly loaded into your official account.</p>
+            <p class="card-desc">Official account top-ups with complete transaction security.</p>
         </div>
         <div class="animated-card">
             <i class="fa-solid fa-headset card-icon"></i>
             <h3 class="card-title">Direct WhatsApp</h3>
-            <p class="card-desc">24/7 dedicated support for instant help and order updates.</p>
+            <p class="card-desc">24/7 dedicated support for fast queries and instant ordering.</p>
         </div>
     </section>
 
+    <!-- Canvas Animation Script -->
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = 'rgba(255, 184, 0, ' + (Math.random() * 0.5 + 0.2) + ')';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 70; i++) {
+            particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
 </body>
 </html>
