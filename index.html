@@ -1,468 +1,276 @@
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSD Suppliers | High-Performance TopUp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #050608;
+            --primary: #ffb800;
+            --neon-blue: #00f0ff;
+            --neon-pink: #ff007f;
+            --card-bg: rgba(15, 17, 23, 0.75);
         }
 
-        /* Header Navbar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(255, 184, 0, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(0, 240, 255, 0.12) 0%, transparent 40%);
+        }
+
+        /* Animated Grid Overlay */
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        /* Header */
         header {
+            position: relative;
+            z-index: 10;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 8%;
-            background-color: rgba(11, 12, 16, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 25px 8%;
+            background: rgba(8, 10, 15, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .logo {
+            font-family: 'Orbitron', sans-serif;
             font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
 
         .logo span {
-            color: #3b82f6;
+            color: var(--primary);
+            text-shadow: 0 0 12px rgba(255, 184, 0, 0.6);
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        nav ul li a {
-            font-size: 14px;
+        nav a {
+            color: #8a92a6;
+            text-decoration: none;
+            margin-left: 30px;
             font-weight: 600;
-            color: #9ca3af;
-            transition: color 0.3s;
+            transition: 0.3s;
         }
 
-        nav ul li a:hover {
-            color: #ffffff;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .cart-icon {
-            font-size: 18px;
-            color: #9ca3af;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .cart-icon:hover {
-            color: #ffffff;
-        }
-
-        .login-btn {
-            background-color: #a855f7;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-
-        .login-btn:hover {
-            background-color: #9333ea;
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            text-shadow: 0 0 8px rgba(255, 184, 0, 0.5);
         }
 
         /* Hero Section */
         .hero {
+            position: relative;
+            z-index: 5;
             text-align: center;
-            padding: 100px 20px 80px 20px;
-            background: radial-gradient(circle at top, rgba(168, 85, 247, 0.15), transparent 60%);
-        }
-
-        .hero h1 {
-            font-size: 56px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
-        }
-
-        .hero p {
-            font-size: 16px;
-            color: #9ca3af;
-            max-width: 600px;
-            margin: 0 auto 35px auto;
-            line-height: 1.6;
-        }
-
-        .hero-btns {
+            padding: 100px 20px 60px 20px;
             display: flex;
-            justify-content: center;
-            gap: 15px;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .btn-primary {
-            background-color: #a855f7;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: transform 0.2s, background 0.3s;
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1.2;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 30%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulseGlow 3s infinite alternate;
         }
 
-        .btn-primary:hover {
-            background-color: #9333ea;
-            transform: translateY(-2px);
+        @keyframes pulseGlow {
+            0% { filter: drop-shadow(0 0 15px rgba(255, 184, 0, 0.2)); }
+            100% { filter: drop-shadow(0 0 35px rgba(255, 184, 0, 0.6)); }
         }
 
-        .btn-secondary {
-            border: 1px solid #a855f7;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: background 0.3s, transform 0.2s;
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(168, 85, 247, 0.1);
-            transform: translateY(-2px);
-        }
-
-        /* Section Global Layout */
-        .section-container {
-            padding: 60px 8%;
-        }
-
-        .section-title {
-            font-size: 28px;
-            font-weight: 700;
+        .hero-subtitle {
+            color: #a0a6b5;
+            font-size: 18px;
+            max-width: 600px;
             margin-bottom: 40px;
-            text-align: left;
         }
 
-        /* Category Grid */
-        .category-grid {
+        /* Animated Action Button */
+        .btn-glow {
+            position: relative;
+            padding: 16px 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 800;
+            color: #000;
+            background: var(--primary);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+            box-shadow: 0 0 25px rgba(255, 184, 0, 0.4);
+            transition: all 0.3s ease;
+            animation: floatBtn 4s ease-in-out infinite;
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 184, 0, 0.8);
+        }
+
+        @keyframes floatBtn {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Animated Cards Section */
+        .grid-container {
+            position: relative;
+            z-index: 5;
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 30px;
         }
 
-        .category-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 40px 30px;
-            text-align: left;
+        .animated-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             position: relative;
             overflow: hidden;
-            cursor: pointer;
-            transition: border-color 0.3s, transform 0.3s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .category-card:hover {
-            border-color: rgba(168, 85, 247, 0.4);
-            transform: translateY(-5px);
-        }
-
-        .category-icon {
-            font-size: 28px;
-            color: #a855f7;
-            margin-bottom: 20px;
-        }
-
-        .category-card h3 {
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        /* Visual Accent Highlights inside Category Cards */
-        .category-card::after {
+        .animated-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent 70%);
-            z-index: 0;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(transparent, transparent, transparent, var(--primary));
+            animation: rotateBorder 6s linear infinite;
+            z-index: -2;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
-        /* Section Header Row (For Best Sellers View All link) */
-        .section-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-        
-        .section-header-row .section-title {
-            margin-bottom: 0;
+        .animated-card::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: #0f1117;
+            border-radius: 18px;
+            z-index: -1;
         }
 
-        .view-all {
-            color: #a855f7;
-            font-weight: 600;
-            font-size: 14px;
-            transition: color 0.3s;
+        .animated-card:hover::before {
+            opacity: 1;
         }
 
-        .view-all:hover {
-            color: #9333ea;
+        .animated-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
-        /* Why Choose Us Features Grid */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+        @keyframes rotateBorder {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 40px 30px;
-            text-align: center;
-            transition: background 0.3s;
-        }
-
-        .feature-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .feature-circle-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px auto;
-            font-size: 20px;
-        }
-
-        .feat-purple { background-color: rgba(168, 85, 247, 0.15); color: #a855f7; }
-        .feat-blue { background-color: rgba(59, 130, 246, 0.15); color: #3b82f6; }
-        .feat-green { background-color: rgba(34, 197, 94, 0.15); color: #22c55e; }
-
-        .feature-card h4 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .feature-card p {
-            font-size: 14px;
-            color: #9ca3af;
-            line-height: 1.6;
-        }
-
-        /* Footer Section */
-        footer {
-            background-color: #07080c;
-            padding: 70px 8% 40px 8%;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 60px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 40px;
-            margin-bottom: 50px;
-        }
-
-        .footer-about p {
-            font-size: 14px;
-            color: #9ca3af;
-            margin: 15px 0 25px 0;
-            max-width: 300px;
-            line-height: 1.6;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-links a {
-            font-size: 18px;
-            color: #9ca3af;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: #ffffff;
-        }
-
-        .footer-column h5 {
-            font-size: 16px;
-            font-weight: 700;
+        .card-icon {
+            font-size: 45px;
+            color: var(--primary);
             margin-bottom: 20px;
-            color: #ffffff;
+            animation: pulseIcon 2s infinite ease-in-out;
         }
 
-        .footer-column ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        @keyframes pulseIcon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
-        .footer-column ul li a {
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card-desc {
+            color: #8a92a6;
             font-size: 14px;
-            color: #9ca3af;
-            transition: color 0.3s;
-        }
-
-        .footer-column ul li a:hover {
-            color: #ffffff;
-        }
-
-        .payment-methods-text {
-            font-size: 14px;
-            color: #9ca3af;
-            margin-top: 10px;
-            font-weight: 600;
-            word-spacing: 8px;
-        }
-
-        /* Responsive Breakpoints */
-        @media(max-width: 968px) {
-            .category-grid, .features-grid, .footer-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero h1 { font-size: 38px; }
-            header { padding: 20px 4%; }
-            .section-container { padding: 40px 4%; }
-            footer { padding: 50px 4% 30px 4%; }
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
+    <div class="grid-bg"></div>
+
     <header>
         <div class="logo">GSD <span>Suppliers</span></div>
         <nav>
-            <ul>
-                <li><a href="product.html">Products</a></li>               
-                <li><a href="#">Gaming Top-ups</a></li>
-                <li><a href="#">Gift Cards</a></li>
-                <li><a href="#">Subscriptions</a></li>
-            </ul>
+            <a href="index.html" class="active">Home</a>
+            <a href="products.html">Store Catalog</a>
         </nav>
-        <div class="nav-right">
-            <i class="fa-solid fa-cart-shopping cart-icon"></i>
-            <a href="#" class="login-btn">Login</a>
-        </div>
     </header>
 
-    <!-- Hero Showcase Section -->
     <section class="hero">
-        <h1>Level Up Your <span class="gradient-text">Gaming<br>Experience</span></h1>
-        <p>Instant delivery of gaming top-ups, gift cards, and subscriptions. Secure, fast, and reliable.</p>
-        <div class="hero-btns">
-            <a href="#" class="btn-primary">Browse Products</a>
-            <a href="#" class="btn-secondary">Learn More</a>
-        </div>
+        <h1 class="hero-title">NEXT-GEN GAMING<br>TOP UP HUB</h1>
+        <p class="hero-subtitle">Instant Free Fire Diamonds, PUBG UC & Subscriptions with automated UID processing.</p>
+        <a href="products.html" class="btn-glow"><i class="fa-solid fa-bolt"></i> ENTER STORE CATALOG</a>
     </section>
 
-    <!-- Browse By Category Section -->
-    <section class="section-container">
-        <h2 class="section-title">Browse by <span class="gradient-text">Category</span></h2>
-        <div class="category-grid">
-            <div class="category-card">
-                <div class="category-icon"><i class="fa-solid fa-gamepad"></i></div>
-                <h3>Gaming Top-ups</h3>
-            </div>
-            <div class="category-card">
-                <div class="category-icon"><i class="fa-solid fa-gift"></i></div>
-                <h3>Gift Cards</h3>
-            </div>
-            <div class="category-card">
-                <div class="category-icon"><i class="fa-solid fa-tv"></i></div>
-                <h3>Subscriptions</h3>
-            </div>
+    <section class="grid-container">
+        <div class="animated-card">
+            <i class="fa-solid fa-bolt card-icon"></i>
+            <h3 class="card-title">Instant Delivery</h3>
+            <p class="card-desc">Orders process directly via UID within minutes of verification.</p>
+        </div>
+        <div class="animated-card">
+            <i class="fa-solid fa-shield-halved card-icon"></i>
+            <h3 class="card-title">100% Safe</h3>
+            <p class="card-desc">Fully legal in-game top-ups directly loaded into your official account.</p>
+        </div>
+        <div class="animated-card">
+            <i class="fa-solid fa-headset card-icon"></i>
+            <h3 class="card-title">Direct WhatsApp</h3>
+            <p class="card-desc">24/7 dedicated support for instant help and order updates.</p>
         </div>
     </section>
-
-    <!-- Placeholders for Featured Products / Best Sellers -->
-    <section class="section-container">
-        <h2 class="section-title">Featured <span class="gradient-text">Products</span></h2>
-        <!-- Products cards can go here dynamically -->
-    </section>
-
-    <section class="section-container">
-        <div class="section-header-row">
-            <h2 class="section-title">Best <span class="gradient-text">Sellers</span></h2>
-            <a href="#" class="view-all">View All →</a>
-        </div>
-        <!-- Best selling item grids can go here -->
-    </section>
-
-    <!-- Why Choose Us Value Section -->
-    <section class="section-container">
-        <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">Why Choose <span class="gradient-text">GSD Suppliers</span></h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-circle-icon feat-purple"><i class="fa-solid fa-bolt"></i></div>
-                <h4>Instant Delivery</h4>
-                <p>Get your digital products delivered instantly to your account.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-circle-icon feat-blue"><i class="fa-solid fa-shield-halved"></i></div>
-                <h4>Secure Payments</h4>
-                <p>Multiple payment options with bank-level security.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-circle-icon feat-green"><i class="fa-solid fa-clock"></i></div>
-                <h4>24/7 Support</h4>
-                <p>Our team is always here to help you with any questions.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer Content -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-about">
-                <div class="logo">GSD <span>Suppliers</span></div>
-                <p>Your trusted marketplace for gaming top-ups, gift cards, and digital subscriptions.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-solid fa-envelope"></i></a>
-                </div>
-            </div>
-            <div class="footer-column">
-                <h5>Quick Links</h5>
-                <ul>
-                    <li><a href="#">All Products</a></li>
-                    <li><a href="#">Gaming Top-ups</a></li>
-                    <li><a href="#">Gift Cards</a></li>
-                    <li><a href="#">Subscriptions</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h5>Support</h5>
-                <ul>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h5>Payment Methods</h5>
-                <p style="font-size: 14px; color: #9ca3af;">We accept:</p>
-                <!-- Typing out the options listed in your reference photo -->
-                <div class="payment-methods-text">eSewa Khalti Visa Mastercard</div>
-            </div>
-        </div>
-    </footer>
 
 </body>
 </html>
